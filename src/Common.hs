@@ -12,7 +12,8 @@ module Common
          module Control.Monad.Except,
          module Control.Monad.Writer.Lazy,
          LBS.Builder,
-         CBS.ByteString
+         CBS.ByteString,
+         IO.stdout
        ) where
 
 import qualified Data.Text
@@ -25,6 +26,7 @@ import Control.Monad.Writer.Lazy
 import Data.Monoid (Monoid(..), mempty, mappend)
 import qualified Data.ByteString.Builder as LBS
 import qualified Data.ByteString.Char8   as CBS
+import qualified System.IO               as IO (stdout)
 --import qualified Data.Time.Clock.POSIX    as Clock
 
 
