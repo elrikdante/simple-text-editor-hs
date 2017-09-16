@@ -10,7 +10,6 @@ module Common -- http://lpaste.net/3029320831361613824
          module GHC.Generics,
          module Control.Applicative,
          module Control.Monad.Except,
-         module Control.Monad.Writer.Lazy,
          module Control.Monad.Free,
          LBS.Builder,
          CBS.ByteString,
@@ -19,7 +18,8 @@ module Common -- http://lpaste.net/3029320831361613824
          isPrefixOf,
          modify,
          get,
-         put
+         put,
+         evalStateT
        ) where
 
 import qualified Data.Text
@@ -27,8 +27,7 @@ import Data.Maybe
 import Data.Either
 import GHC.Generics
 import Control.Monad.Except
-import Control.Monad.Writer.Lazy
-import Control.Monad.State.Lazy (modify,StateT,put,get)
+import Control.Monad.State.Lazy (modify,StateT,put,get,evalStateT)
 import Control.Monad.Free
 import Control.Applicative
 import Data.Monoid (Monoid(..), mempty, mappend)
