@@ -1,7 +1,8 @@
-{-# LANGUAGE OverloadedStrings #-}
 -- Copyright (C) 2017 - Present, ElrikGroup.com, Inc
 -- Author: Dante Elrik
 -- All rights reserved.
+{-# LANGUAGE OverloadedStrings #-}
+
 module Interpreter.Read (run) where
 
 import Types
