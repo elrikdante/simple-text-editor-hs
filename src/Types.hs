@@ -1,11 +1,23 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE OverloadedStrings,TupleSections #-}
 module Types where
 import Common -- http://lpaste.net/3029320831361613824
 import Common (Builder,ByteString)
 import qualified Data.ByteString.Char8 as CBS
-type Error      = ByteString
-data Env        = Env ByteString [UndoOp ByteString Int]
 
+type Error      = ByteString
+
+data UndoOp' b k next = NONE
+                      | UDA k next
+                      | UDD b next
+
+instance Functor (UndoOp' b k) where
+  fmap f (UDA k next) = UDA k (f next)
+  fmap f (UDD b next) = UDD b (f next)
+  fmap f NONE         = NONE
+
+data Env        = Env ByteString [UndoOp ByteString Int]
+data Env' r     = Env' ByteString (Free (UndoOp' ByteString Int) ())
 data UndoOp b k   = UndoAppend k
                   | UndoDel    b
 
@@ -44,7 +56,7 @@ undo'     = Free (Undo       (Pure ()))
 halt'     = Free Halt
 throw' e  = Free (Throw e)
 begin' desc s = Free (Begin desc s (Pure ()))
-
+env' = Env' "" (Free (UDA 10 (Pure ())))
 prg :: Free (Op ByteString Int) ()
 prg = do
    pure (Begin "the canonical test case" 8)
@@ -58,4 +70,5 @@ prg = do
    echo' 1
 
 defaultState = Env CBS.empty []
+defaultState' = Env' CBS.empty (Free NONE)
 -- evalStateT (runProgram prg) defaultState
