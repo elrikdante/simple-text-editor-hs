@@ -1,7 +1,7 @@
 -- Copyright (C) 2017 - Present, ElrikGroup.com, Inc
 -- Author: Dante Elrik
 -- All rights reserved.
-module Common
+module Common -- http://lpaste.net/3029320831361613824
        (
          module Data.Monoid,
          module Data.Text,
@@ -11,19 +11,28 @@ module Common
          module Control.Applicative,
          module Control.Monad.Except,
          module Control.Monad.Writer.Lazy,
+         module Control.Monad.Free,
          LBS.Builder,
          CBS.ByteString,
-         IO.stdout
+         StateT,
+         IO.stdout,
+         isPrefixOf,
+         modify,
+         get,
+         put
        ) where
 
 import qualified Data.Text
 import Data.Maybe
 import Data.Either
-import Control.Applicative
 import GHC.Generics
 import Control.Monad.Except
 import Control.Monad.Writer.Lazy
+import Control.Monad.State.Lazy (modify,StateT,put,get)
+import Control.Monad.Free
+import Control.Applicative
 import Data.Monoid (Monoid(..), mempty, mappend)
+import Data.List(isPrefixOf)
 import qualified Data.ByteString.Builder as LBS
 import qualified Data.ByteString.Char8   as CBS
 import qualified System.IO               as IO (stdout)
