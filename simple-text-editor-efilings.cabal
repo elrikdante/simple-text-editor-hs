@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib,Common
+  exposed-modules:     Lib,Common,Interpreter.Read,Interpreter.Execute,Interpreter.Pretty,Interpreter.Build,Types
   build-depends:       QuickCheck >= 2.9.2
                      , base >= 4.7 && < 5
                      , bytestring >= 0.10.8.1
