@@ -2,10 +2,10 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
-module Interpreter.Read (run) where -- TODO: ADD UNIVERSAL RESOURCE LOCATOR
+module Interpreter.Read (run) where -- http://lpaste.net/7583342056232189952
 
-import Types -- http://lpaste.net/3752197452577374208 Types
-import Common -- http://lpaste.net/3029320831361613824 Common
+import Types -- http://lpaste.net/3752197452577374208
+import Common -- http://lpaste.net/3029320831361613824
 import qualified Interpreter.Build (run)
 import qualified Text.Read (readMaybe)
 

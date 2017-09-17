@@ -2,7 +2,7 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
-module Interpreter.Execute2 (run) where -- TODO: ADD UNIVERSAL RESOURCE LOCATOR
+module Interpreter.Execute2 (run) where -- http://lpaste.net/1413778628252008448
 
 import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common

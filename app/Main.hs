@@ -2,14 +2,14 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
-module Main where
+module Main where -- http://lpaste.net/3465999502194769920
 
 import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
 import qualified Interpreter.Read   (run)
 import qualified Interpreter.Pretty (run)
 import qualified Interpreter.Execute(run)
-import qualified Interpreter.Execute2(run)
+import qualified Interpreter.Execute2(run)  -- http://lpaste.net/1413778628252008448
 
 main :: IO ()
 main = do
