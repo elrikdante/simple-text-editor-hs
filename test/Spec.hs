@@ -6,8 +6,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE NPlusKPatterns #-}
-import Common
-import Common (Builder,ByteString)
+import Common -- http://lpaste.net/3029320831361613824 Common
+import Common -- http://lpaste.net/3029320831361613824 Common
 import Test.Framework (defaultMain, testGroup)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
 import Test.QuickCheck

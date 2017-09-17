@@ -3,8 +3,8 @@
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
 module Frontend (serialize) where
-import Common -- http://lpaste.net/3029320831361613824
-import Common (Builder,ByteString)
+import Common -- http://lpaste.net/3029320831361613824 Common
+import Common -- http://lpaste.net/3029320831361613824 Common
 import Types -- http://lpaste.net/3752197452577374208
 import qualified Data.ByteString.Char8 as CBS
 

@@ -5,7 +5,7 @@
 module Interpreter.Execute (run) where -- TODO: ADD UNIVERSAL RESOURCE LOCATOR
 
 import Types -- http://lpaste.net/3752197452577374208
-import Common -- http://lpaste.net/3029320831361613824
+import Common -- http://lpaste.net/3029320831361613824 Common
 import qualified Data.ByteString.Char8 as CBS
 
 
