@@ -6,9 +6,9 @@ module Main where -- http://lpaste.net/3465999502194769920
 
 import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
-import qualified Interpreter.Read   (run)
-import qualified Interpreter.Pretty (run)
-import qualified Interpreter.Execute(run)
+import qualified Interpreter.Read   (run)   -- http://lpaste.net/7583342056232189952
+import qualified Interpreter.Pretty (run)   -- http://lpaste.net/edit/6717294233507594240
+import qualified Interpreter.Execute(run)   -- http://lpaste.net/5169620089997099008
 import qualified Interpreter.Execute2(run)  -- http://lpaste.net/1413778628252008448
 
 main :: IO ()

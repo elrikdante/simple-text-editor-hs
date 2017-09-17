@@ -2,7 +2,7 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
-module Interpreter.Pretty (run) where
+module Interpreter.Pretty (run) where -- http://lpaste.net/edit/6717294233507594240
 
 import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
