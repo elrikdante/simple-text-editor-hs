@@ -16,12 +16,20 @@ mutate() {
 	 -exec sed -i.clean -E -e "s/.*import ${IMPORT}.*/import ${IMPORT} -- ${IMPORT_TEMPLATE//\//\\/}/" {} \;
 }
 
+usage() {
+    echo $0
+    echo "-----"
+    echo "usage: $0 [clean|list|update|status]"
+}
 
 cleanup
-if [[ $1 == clean ]]; then
-   exit 0
-fi
-mutate
+case $1 in
+    c|clean) exit 0 ;;
+    l|list) find . -iname "*.hs*" -exec grep -i -n -e "import " {} \; ;;
+    u|update|mutate|m) mutate ;;
+    s|status) echo "STATUS" ;;
+    *) usage
+esac
 
 
 
