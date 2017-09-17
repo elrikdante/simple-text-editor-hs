@@ -2,7 +2,7 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
-module Types where -- TODO: ADD UNIVERSAL RESOURCE LOCATOR
+module Types where -- http://lpaste.net/3752197452577374208
 
 import Common -- http://lpaste.net/3029320831361613824
 import qualified Data.ByteString.Char8 as CBS

@@ -1,9 +1,10 @@
 -- Copyright (C) 2017 - Present, ElrikGroup.com, Inc
 -- Author: Dante Elrik
 -- All rights reserved.
+{-# LANGUAGE OverloadedStrings #-}
 module Interpreter.Pretty (run) where
 
-import Types
+import Types -- http://lpaste.net/3752197452577374208
 import Common -- http://lpaste.net/3029320831361613824
 
 run :: (Show a

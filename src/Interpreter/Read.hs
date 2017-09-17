@@ -4,7 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Interpreter.Read (run) where -- TODO: ADD UNIVERSAL RESOURCE LOCATOR
 
-import Types
+import Types -- http://lpaste.net/3752197452577374208
 import Common -- http://lpaste.net/3029320831361613824
 import qualified Interpreter.Build (run)
 import qualified Text.Read (readMaybe)
@@ -13,7 +13,9 @@ run :: IO (Int,(Free (Op ByteString Int) ()))
 run =  do
   commands <- Text.Read.readMaybe <$> getLine :: IO (Maybe Int)
   case commands of
-    Nothing             -> putStrLn "PLEASE SUPPLY (expectedNumberOfCommands: INTEGER) SO RESOURCES CAN BE ALLOCATED APPROPRIATELY." *> run
+    Nothing             -> do
+      putStrLn "PLEASE SUPPLY (expectedNumberOfCommands: INTEGER) SO RESOURCES CAN BE ALLOCATED APPROPRIATELY."
+      run
     Just amountExpected -> liftM (foldl (step amountExpected) zed . lines) getContents
   where
     step _N (0,_) s    = (1    ,                               Interpreter.Build.run s)
