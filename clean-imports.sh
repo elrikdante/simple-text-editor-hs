@@ -9,14 +9,21 @@ cleanup() {
     find . -iname "*.clean" -exec echo {} \+ -exec rm -v {} \;
 }
 
-echo "UPDATE IMPORTS(${IMPORT}) to " ${IMPORT_TEMPLATE}
-# exit 0 #-- 
+mutate() {
+    echo "UPDATE IMPORTS(${IMPORT}) to " ${IMPORT_TEMPLATE}   
+    find . -iname "*.hs*" -exec echo {} \; \
+	 -exec grep -i -n -e "import ${IMPORT}" {} \+ \
+	 -exec sed -i.clean -E -e "s/.*import ${IMPORT}.*/import ${IMPORT} -- ${IMPORT_TEMPLATE//\//\\/}/" {} \;
+}
+
 
 cleanup
+if [[ $1 == clean ]]; then
+   exit 0
+fi
+mutate
 
-find . -iname "*.hs*" -exec echo {} \; \
-  -exec grep -i -n -e "import ${IMPORT}" {} \+ \
-  -exec sed -i.clean -E -e "s/.*import ${IMPORT}.*/import ${IMPORT} -- ${IMPORT_TEMPLATE//\//\\/}/" {} \;
+
 
 
 
