@@ -20,13 +20,16 @@ run =  do
       (amountTaken,program) <- liftM (foldl (step amountExpected) zed . lines) getContents
       when (amountTaken > amountExpected) (putStrLn "amountTaken > amountExpected (L00)")
       when (amountTaken < amountExpected) (putStrLn "amountTaken < amountExpected (L01)")
-      when (amountTaken < 100) (putStrLn "amountTaken(S)")
-      when (amountTaken < 1000) (putStrLn "amountTaken(SS)")
-      when (amountTaken < 10000) (putStrLn "amountTaken(SSS)")
-      when (amountTaken < 100000) (putStrLn "amountTaken(SSS)")
-      when (amountTaken < 1000000) (putStrLn "amountTaken(SSSS)")
-      when (amountTaken < 10000000) (putStrLn "amountTaken(SSSSS)")
-      when (amountTaken < 100000000) (putStrLn "amountTaken(SSSSSS)")
+-- {- DIAGNOSTIC CODE BEGIN     
+      when (amountTaken > 100000000) (putStrLn "amountTaken(SSSSSS)")
+      when (amountTaken > 10000000) (putStrLn "amountTaken(SSSSS)")
+      when (amountTaken > 1000000) (putStrLn "amountTaken(SSSS)")
+      when (amountTaken > 100000) (putStrLn "amountTaken(SSS)")
+      when (amountTaken > 10000) (putStrLn "amountTaken(SSS)")
+      when (amountTaken > 1000) (putStrLn "amountTaken(SS)")
+      when (amountTaken <=1000) (putStrLn "amountTaken(S)")
+-- -} DIAGNOSTIC CODE END
+
       return (amountTaken,program)
 
   where

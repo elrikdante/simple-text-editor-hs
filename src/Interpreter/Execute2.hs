@@ -31,5 +31,3 @@ run (Free (Echo k r))   = do
   s <- flip CBS.index (pred k) . (\(Env2 text _) -> text) <$> get
   liftIO (CBS.hPutStrLn stdout (CBS.singleton s))
   run r
-
-
