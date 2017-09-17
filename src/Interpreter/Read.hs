@@ -16,12 +16,24 @@ run =  do
     Nothing             -> do
       putStrLn "PLEASE SUPPLY (expectedNumberOfCommands: INTEGER) SO RESOURCES CAN BE ALLOCATED APPROPRIATELY."
       run
-    Just amountExpected -> liftM (foldl (step amountExpected) zed . lines) getContents
+    Just amountExpected -> do
+      (amountTaken,program) <- liftM (foldl (step amountExpected) zed . lines) getContents
+      when (amountTaken > amountExpected) (putStrLn "amountTaken > amountExpected (L00)")
+      when (amountTaken < amountExpected) (putStrLn "amountTaken < amountExpected (L01)")
+      when (amountTaken < 100) (putStrLn "amountTaken(S)")
+      when (amountTaken < 1000) (putStrLn "amountTaken(SS)")
+      when (amountTaken < 10000) (putStrLn "amountTaken(SSS)")
+      when (amountTaken < 100000) (putStrLn "amountTaken(SSS)")
+      when (amountTaken < 1000000) (putStrLn "amountTaken(SSSS)")
+      when (amountTaken < 10000000) (putStrLn "amountTaken(SSSSS)")
+      when (amountTaken < 100000000) (putStrLn "amountTaken(SSSSSS)")
+      return (amountTaken,program)
+
   where
     step _N (0,_) s    = (1    ,                               Interpreter.Build.run s)
     step _N (n,trie) s
       | n <= _N       = (succ n,                       trie *> Interpreter.Build.run s)
-      | otherwise     = (_N    ,begin' "unamed" _N  *> trie *> halt')
+      | otherwise     = (_N    ,begin' "unamed" _N  *> trie )
     zed               = (0     ,undefined)
     
 

@@ -9,8 +9,9 @@ import Common -- http://lpaste.net/3029320831361613824
 import qualified Data.ByteString.Char8 as CBS (pack)
 
 run :: String -> Free (Op ByteString Int) ()
-run ""          = pure ()
+run ""          = halt'
 run ('1':' ':b) = app' (CBS.pack b)
 run ('2':' ':k) = del' (read k :: Int)
 run ('3':' ':k) = echo' (read k :: Int)
 run ('4':_    ) = undo'
+run x           = noop'
