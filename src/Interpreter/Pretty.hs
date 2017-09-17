@@ -4,7 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Interpreter.Pretty (run) where
 
-import Types -- http://lpaste.net/3752197452577374208
+import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
 
 run :: (Show a

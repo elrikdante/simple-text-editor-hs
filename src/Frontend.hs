@@ -5,7 +5,7 @@
 module Frontend (serialize) where
 import Common -- http://lpaste.net/3029320831361613824 Common
 import Common -- http://lpaste.net/3029320831361613824 Common
-import Types -- http://lpaste.net/3752197452577374208
+import Types -- http://lpaste.net/3752197452577374208 Types
 import qualified Data.ByteString.Char8 as CBS
 
 serialize :: String -> Op ByteString Int (Free f ())

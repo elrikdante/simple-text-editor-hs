@@ -8,7 +8,7 @@ echo "CLEANING UP"
 find . -iname "*.clean" -exec echo {} \+ -exec rm -v {} \;
 
 echo "UPDATE IMPORTS(${IMPORT}) to " ${IMPORT_TEMPLATE}
-exit 0
+# exit 0 #-- 
 
 find . -iname "*.hs*" -exec echo {} \; \
   -exec grep -i -n -e "import ${IMPORT}" {} \+ \
