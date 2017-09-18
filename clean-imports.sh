@@ -17,6 +17,7 @@ mutate() {
 }
 
 usage() {
+    echo "-----"
     echo $0
     echo "-----"
     echo "usage: $0 [clean|list|update|status]"

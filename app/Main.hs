@@ -15,5 +15,6 @@ main :: IO ()
 main = do
   (_,program) <- Interpreter.Read.run
   putStrLn (Interpreter.Pretty.run program)
-  evalStateT (Interpreter.Execute2.run program) defaultState2
   evalStateT (Interpreter.Execute.run program) defaultState
+  evalStateT (Interpreter.Execute2.run program) defaultState2
+
