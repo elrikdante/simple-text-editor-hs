@@ -5,6 +5,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE Arrows #-}
 -- INTERNAL
 import Types  -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
