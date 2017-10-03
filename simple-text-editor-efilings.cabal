@@ -21,6 +21,7 @@ library
                      , bytestring >= 0.10.8.1
                      , free >= 4.12.4
                      , mtl >= 2.2.1
+                     , random >= 1.1
                      , test-framework >= 0.8.1.1
                      , test-framework-quickcheck2 >= 0.3.0.4
                      , text >= 1.2.2.2
@@ -37,6 +38,7 @@ executable simple-text-editor-efilings-exe
                      , bytestring >= 0.10.8.1
                      , free >= 4.12.4
                      , mtl >= 2.2.1
+                     , random >= 1.1
                      , simple-text-editor-efilings
                      , test-framework >= 0.8.1.1
                      , test-framework-quickcheck2 >= 0.3.0.4
@@ -55,6 +57,7 @@ test-suite ste-basic-test
                      , bytestring >= 0.10.8.1
                      , free >= 4.12.4
                      , mtl >= 2.2.1
+                     , random >= 1.1
                      , simple-text-editor-efilings
                      , test-framework >= 0.8.1.1
                      , test-framework-quickcheck2 >= 0.3.0.4
@@ -74,6 +77,7 @@ test-suite simple-text-editor-efilings-test
                      , bytestring >= 0.10.8.1
                      , free >= 4.12.4
                      , mtl >= 2.2.1
+                     , random >= 1.1
                      , simple-text-editor-efilings
                      , test-framework >= 0.8.1.1
                      , test-framework-quickcheck2 >= 0.3.0.4
@@ -93,6 +97,7 @@ test-suite simple-text-editor-efilings-free-test
                      , bytestring >= 0.10.8.1
                      , free >= 4.12.4
                      , mtl >= 2.2.1
+                     , random >= 1.1
                      , simple-text-editor-efilings
                      , test-framework >= 0.8.1.1
                      , test-framework-quickcheck2 >= 0.3.0.4

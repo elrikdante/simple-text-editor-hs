@@ -29,7 +29,6 @@ run =  do
       when (amountTaken > 1000) (putStrLn "amountTaken(SS)")
       when (amountTaken <=1000) (putStrLn "amountTaken(S)")
 -- -} DIAGNOSTIC CODE END
-
       return (amountTaken,program)
 
   where
