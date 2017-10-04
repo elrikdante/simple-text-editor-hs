@@ -7,10 +7,11 @@ module Interpreter.Execute (run) where -- http://lpaste.net/5169620089997099008
 import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
 import qualified Data.ByteString.Char8 as CBS
-
+import Debug.Trace
 
 run :: Free (Op ByteString Int) r -> StateT Env IO ()
 run (Pure _)            = pure ()
+run (Free (Begin desc inscnt r)) = liftIO (CBS.hPutStrLn stdout desc) *> run r
 run (Free Halt)         = pure ()
 run (Free (Undo r))     = modify go *> run r
   where
@@ -32,5 +33,6 @@ run (Free (Echo k r))   = do
   s <- flip CBS.index (pred k) . (\(Env text _) -> text) <$> get
   liftIO (CBS.hPutStrLn stdout (CBS.singleton s))
   run r
+
 
 

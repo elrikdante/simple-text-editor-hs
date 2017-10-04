@@ -9,8 +9,9 @@ import Common -- http://lpaste.net/3029320831361613824 Common
 import qualified Data.ByteString.Char8 as CBS
 
 run :: Free (Op ByteString Int) r -> StateT (Env2 ()) IO ()
-run (Pure _)            = pure ()
-run (Free (Undo r)) = modify go *> run r
+run (Free (Begin desc inscnt r)) = liftIO (CBS.hPutStrLn stdout desc) *> run r
+run (Pure _)                     = pure ()
+run (Free (Undo r))              = modify go *> run r
   where
     go (Env2 s l) = update s l
     update s (Free (UDA k r)) = Env2 (CBS.take ((CBS.length s) - k) s) r

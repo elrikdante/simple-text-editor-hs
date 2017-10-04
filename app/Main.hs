@@ -2,6 +2,7 @@
 -- Author: Dante Elrik
 -- All rights reserved.
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE Arrows #-}
 module Main where -- http://lpaste.net/3465999502194769920
 
 import Types -- http://lpaste.net/3752197452577374208 Types
@@ -11,9 +12,13 @@ import qualified Interpreter.Pretty (run)   -- http://lpaste.net/671729423350759
 import qualified Interpreter.Execute(run)   -- http://lpaste.net/5169620089997099008
 import qualified Interpreter.Execute2(run)  -- http://lpaste.net/1413778628252008448
 
+-- printing program
+-- liftM Interpreter.Pretty.run (generate arbitraryProgram) >>= putStrLn
+
 main :: IO ()
 main = do
   (_,program) <- Interpreter.Read.run
+  const (Interpreter.Pretty.run program) >>> putStrLn $ ()
   putStrLn (Interpreter.Pretty.run program)
   evalStateT (Interpreter.Execute.run program) defaultState
   evalStateT (Interpreter.Execute2.run program) defaultState2

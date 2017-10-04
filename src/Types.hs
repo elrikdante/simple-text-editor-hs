@@ -1,6 +1,9 @@
 -- Copyright (C) 2017 - Present, ElrikGroup.com, Inc
 -- Author: Dante Elrik
 -- All rights reserved.
+{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 module Types where -- http://lpaste.net/3752197452577374208
 
@@ -49,6 +52,31 @@ instance Functor (Op b k) where
   fmap f (Begin desc steps next) = Begin desc steps (f next)
   fmap f Halt              = Halt
 
+
+instance Arbitrary ByteString where arbitrary = liftM CBS.pack arbitrary
+
+positiveInt       = arbitrary `suchThat` (>= (0::Int))
+arbitraryProgram  = positiveInt >>= actions
+
+actions n = liftM2 begin'
+            (pure (CBS.concat ["RANDOM PROGRAM OF "
+                              , CBS.pack (show n)
+                              , " ACTIONS"
+                              ]))
+            (pure n) >>= \ prefix ->
+  liftM2 (>>) (pure prefix) (foldr step zed (take n (repeat ())))
+
+  where
+    step _ program = liftM2 (>>)
+                     (oneof [
+                         liftM app' arbitrary
+                       , liftM echo' positiveInt
+                       , liftM del' positiveInt
+                       , return undo'
+                         ])
+                     (program)
+    zed            = (return halt')
+
 app'  b   = Free (Append b   (Pure ()))
 del'  k   = Free (Del    k   (Pure ()))
 echo' k   = Free (Echo   k   (Pure ()))
@@ -58,8 +86,9 @@ halt'     = Free Halt
 throw' e  = Free (Throw e)
 begin' desc s = Free (Begin desc s (Pure ()))
 env' = Env2 "" (Free (UDA 10 (Pure ())))
-prg :: Free (Op ByteString Int) ()
 
+
+prg :: Free (Op ByteString Int) ()
 prg = do
    pure (Begin "the canonical test case" 8)
    app' "abc"

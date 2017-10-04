@@ -11,6 +11,8 @@ module Common -- http://lpaste.net/3029320831361613824
          module Control.Applicative,
          module Control.Monad.Except,
          module Control.Monad.Free,
+         module Control.Arrow,
+         module Test.QuickCheck,
          LBS.Builder,
          CBS.ByteString,
          StateT,
@@ -30,11 +32,13 @@ import Control.Monad.Except
 import Control.Monad.State.Lazy (modify,StateT,put,get,evalStateT)
 import Control.Monad.Free
 import Control.Applicative
+import Control.Arrow
 import Data.Monoid (Monoid(..), mempty, mappend)
 import Data.List(isPrefixOf)
 import qualified Data.ByteString.Builder as LBS
 import qualified Data.ByteString.Char8   as CBS
 import qualified System.IO               as IO (stdout)
+import Test.QuickCheck         
 --import qualified Data.Time.Clock.POSIX    as Clock
 
 
