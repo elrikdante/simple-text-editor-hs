@@ -14,6 +14,7 @@ import qualified Interpreter.Execute2(run)  -- http://lpaste.net/141377862825200
 
 -- printing program
 -- liftM Interpreter.Pretty.run (generate arbitraryProgram) >>= putStrLn
+-- putStrLn =<< liftM Interpreter.Pretty.run (generate arbitrary :: IO (Free (Op ByteString Int) ()))
 
 -- executing program
 -- liftM Interpreter.Execute.run (generate arbitraryProgram) >>= flip evalStateT defaultState
@@ -21,11 +22,31 @@ import qualified Interpreter.Execute2(run)  -- http://lpaste.net/141377862825200
 -- executing program2
 -- liftM Interpreter.Execute2.run (generate arbitraryProgram) >>= flip evalStateT defaultState2
 
+-- 0.pg @ http://lpaste.net/358624
+{-
+stack exec app-exe < programs/0.pg
+amountTaken(S)
+APPEND "ABC"
+ECHO 3
+DEL 3
+APPEND "XY"
+ECHO 2
+UNDO
+UNDO
+ECHO 1
+RETURN ()
+
+C
+Y
+A
+-}
+
+
 main :: IO ()
 main = do
   (_,program) <- Interpreter.Read.run
-  const (Interpreter.Pretty.run program) >>> putStrLn $ ()
-  putStrLn (Interpreter.Pretty.run program)
-  evalStateT (Interpreter.Execute.run program) defaultState
+--  (const (Interpreter.Pretty.run program) >>> putStrLn) $ ()
+--  putStrLn (Interpreter.Pretty.run program)
+--  evalStateT (Interpreter.Execute.run program) defaultState
   evalStateT (Interpreter.Execute2.run program) defaultState2
 

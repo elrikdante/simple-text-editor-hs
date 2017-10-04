@@ -27,7 +27,7 @@ run =  do
       when (amountTaken > 100000) (putStrLn "amountTaken(SSS)")
       when (amountTaken > 10000) (putStrLn "amountTaken(SSS)")
       when (amountTaken > 1000) (putStrLn "amountTaken(SS)")
-      when (amountTaken <=1000) (putStrLn "amountTaken(S)")
+--      when (amountTaken <=1000) (putStrLn "amountTaken(S)")
 -- -} DIAGNOSTIC CODE END
       return (amountTaken,program)
 

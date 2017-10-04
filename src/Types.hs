@@ -1,10 +1,8 @@
 -- Copyright (C) 2017 - Present, ElrikGroup.com, Inc
 -- Author: Dante Elrik
 -- All rights reserved.
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings,FlexibleInstances #-}
+
 module Types where -- http://lpaste.net/3752197452577374208
 
 import Common -- http://lpaste.net/3029320831361613824 Common
@@ -53,7 +51,8 @@ instance Functor (Op b k) where
   fmap f Halt              = Halt
 
 
-instance Arbitrary ByteString where arbitrary = liftM CBS.pack arbitrary
+instance Arbitrary ByteString                   where  arbitrary = liftM CBS.pack arbitrary
+instance Arbitrary (Free (Op ByteString Int) r) where  arbitrary = arbitraryProgram
 
 positiveInt       = arbitrary `suchThat` (>= (0::Int))
 arbitraryProgram  = positiveInt >>= actions
