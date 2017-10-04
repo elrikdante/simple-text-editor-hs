@@ -11,7 +11,7 @@ import Debug.Trace
 
 run :: Free (Op ByteString Int) r -> StateT Env IO ()
 run (Pure _)            = pure ()
-run (Free (Begin desc inscnt r)) = liftIO (CBS.hPutStrLn stdout desc) *> run r
+run (Free (Begin desc inscnt r)) = {-liftIO (CBS.hPutStrLn stdout desc) *>-} run r
 run (Free Halt)         = pure ()
 run (Free (Undo r))     = modify go *> run r
   where
@@ -32,9 +32,10 @@ run (Free (Del k r))    = modify go *> run r
 
 run (Free (Echo k r))   = do
   s <- (\(Env text _) -> text) <$> get
-  c <- case k > (CBS.length s) of
-    True  -> return Nothing
-    False -> return (Just (CBS.index s (max (pred k) 0)))
+  c <- case (k > (CBS.length s),CBS.length s) of
+    (True,_)  -> return Nothing
+    (False,0) -> return Nothing
+    (False,n) -> return (Just (CBS.index s (max (pred k) 0)))
   maybe (return ()) (liftIO . CBS.hPutStrLn stdout . CBS.singleton) c *> run r
 
 
