@@ -15,6 +15,12 @@ import qualified Interpreter.Execute2(run)  -- http://lpaste.net/141377862825200
 -- printing program
 -- liftM Interpreter.Pretty.run (generate arbitraryProgram) >>= putStrLn
 
+-- executing program
+-- liftM Interpreter.Execute.run (generate arbitraryProgram) >>= flip evalStateT defaultState
+
+-- executing program2
+-- liftM Interpreter.Execute2.run (generate arbitraryProgram) >>= flip evalStateT defaultState2
+
 main :: IO ()
 main = do
   (_,program) <- Interpreter.Read.run

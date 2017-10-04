@@ -29,6 +29,8 @@ run (Free (Del k r))    = modify go *> run r
       in Env2 rest (Free (UDD dropped l))
 run (Free Halt)         = pure ()
 run (Free (Echo k r))   = do
-  s <- flip CBS.index (pred k) . (\(Env2 text _) -> text) <$> get
-  liftIO (CBS.hPutStrLn stdout (CBS.singleton s))
-  run r
+  s <- (\(Env2 text _) -> text) <$> get
+  c <- case k > (CBS.length s) of
+    True  -> return Nothing
+    False -> return (Just (CBS.index s (max (pred k) 0)))
+  maybe (return ()) (liftIO . CBS.hPutStrLn stdout . CBS.singleton) c *> run r
