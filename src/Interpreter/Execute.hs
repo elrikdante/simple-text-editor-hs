@@ -17,6 +17,7 @@ run (Free (Undo r))     = modify go *> run r
   where
     go (Env s (UndoAppend k : l)) = Env (CBS.take ((CBS.length s) - k) s) l
     go (Env s (UndoDel    b : l)) = Env (CBS.append s b) l
+    go (Env s []) = Env s []
 
 run (Free (Append b r)) = modify go *> run r
   where
@@ -30,9 +31,11 @@ run (Free (Del k r))    = modify go *> run r
       in Env rest ((UndoDel dropped) : l)
 
 run (Free (Echo k r))   = do
-  s <- flip CBS.index (pred k) . (\(Env text _) -> text) <$> get
-  liftIO (CBS.hPutStrLn stdout (CBS.singleton s))
-  run r
+  s <- (\(Env text _) -> text) <$> get
+  c <- case k > (CBS.length s) of
+    True  -> return Nothing
+    False -> return (Just (CBS.index s (max (pred k) 0)))
+  maybe (return ()) (liftIO . CBS.hPutStrLn stdout . CBS.singleton) c *> run r
 
 
 
