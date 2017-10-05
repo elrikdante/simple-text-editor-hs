@@ -43,8 +43,8 @@ A
 -}
 main :: IO ()
 main = getLine >> (forever . loop =<< newIORef defaultState2)
-    where loop sRef = do
-             state'  <- readIORef sRef
-             program <- liftM Interpreter.Build.run getLine
-             ((),state'') <- runStateT (Interpreter.Execute2.run program) state'
-             writeIORef sRef state''
+    where parse     = Interpreter.Execute2.run . Interpreter.Build.run
+          loop sRef = do
+             chunk       <- getLine
+             state       <- readIORef sRef
+             writeIORef sRef . snd =<< runStateT (parse chunk) state
