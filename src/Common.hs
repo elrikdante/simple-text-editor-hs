@@ -21,7 +21,8 @@ module Common -- http://lpaste.net/3029320831361613824
          modify,
          get,
          put,
-         evalStateT
+         evalStateT,
+         runStateT
        ) where
 
 import qualified Data.Text
@@ -29,7 +30,7 @@ import Data.Maybe
 import Data.Either
 import GHC.Generics
 import Control.Monad.Except
-import Control.Monad.State.Lazy (modify,StateT,put,get,evalStateT)
+import Control.Monad.State.Lazy (modify,StateT,put,get,evalStateT,runStateT)
 import Control.Monad.Free
 import Control.Applicative
 import Control.Arrow

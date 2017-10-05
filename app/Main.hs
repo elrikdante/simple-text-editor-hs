@@ -9,9 +9,10 @@ import Types -- http://lpaste.net/3752197452577374208 Types
 import Common -- http://lpaste.net/3029320831361613824 Common
 import qualified Interpreter.Read   (run)   -- http://lpaste.net/7583342056232189952
 import qualified Interpreter.Pretty (run)   -- http://lpaste.net/6717294233507594240
+import qualified Interpreter.Build (run)   -- http://lpaste.net/6717294233507594240
 import qualified Interpreter.Execute(run)   -- http://lpaste.net/5169620089997099008
 import qualified Interpreter.Execute2(run)  -- http://lpaste.net/1413778628252008448
-
+import Data.IORef
 -- printing program
 -- liftM Interpreter.Pretty.run (generate arbitraryProgram) >>= putStrLn
 -- putStrLn =<< liftM Interpreter.Pretty.run (generate arbitrary :: IO (Free (Op ByteString Int) ()))
@@ -40,13 +41,10 @@ C
 Y
 A
 -}
-
-
 main :: IO ()
-main = do
-  (_,program) <- Interpreter.Read.run
---  (const (Interpreter.Pretty.run program) >>> putStrLn) $ ()
---  putStrLn (Interpreter.Pretty.run program)
---  evalStateT (Interpreter.Execute.run program) defaultState
-  evalStateT (Interpreter.Execute2.run program) defaultState2
-
+main = getLine >> (forever . loop =<< newIORef defaultState2)
+    where loop sRef = do
+             state'  <- readIORef sRef
+             program <- liftM Interpreter.Build.run getLine
+             ((),state'') <- runStateT (Interpreter.Execute2.run program) state'
+             writeIORef sRef state''
